@@ -1,0 +1,19 @@
+source /opt/ros/humble/setup.bash
+source ~/ros2_caret_ws/install/local_setup.bash
+source ~/autoware_with_caret/install/local_setup.bash
+export LD_PRELOAD=$(readlink -f ~/ros2_caret_ws/install/caret_trace/lib/libcaret.so)
+
+source ./autoware_filter.bash
+ros2 launch autoware_launch e2e_simulator.launch.xml vehicle_model:=sample_vehicle sensor_model:=awsim_sensor_kit map_path:=/home/mlabszw/AWSIM_map
+
+
+ulimit -n 65536
+source /opt/ros/humble/setup.bash
+source ~/ros2_caret_ws/install/local_setup.bash
+export ROS_TRACE_DIR=~/autoware_with_caret/evaluate
+ros2 caret record -s xxxx
+
+ros2 caret create_architecture_file /home/mlabszw/autoware_with_caret/evaluate/xxxx/ -o /home/mlabszw/autoware_with_caret/evaluate/archxxxx.yaml
+
+MAKEFLAGES="-j16" colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=Off -DCMAKE_CXX_FLAGS="-w"
+
