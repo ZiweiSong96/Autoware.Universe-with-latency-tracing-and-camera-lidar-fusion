@@ -33,7 +33,7 @@ CNNClassifier::CNNClassifier(rclcpp::Node * node_ptr) : node_ptr_(node_ptr)
   std::string precision;
   std::string label_file_path;
   std::string model_file_path;
-  precision = node_ptr_->declare_parameter("classifier_precision", "fp16");
+  precision = node_ptr_->declare_parameter("classifier_precision", "fp32");
   label_file_path = node_ptr_->declare_parameter("classifier_label_path", "labels.txt");
   model_file_path = node_ptr_->declare_parameter("classifier_model_path", "model.onnx");
   // ros param does not support loading std::vector<float>

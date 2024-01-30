@@ -18,6 +18,11 @@
 #include <utility>
 #include <vector>
 
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+
 namespace traffic_light
 {
 TrafficLightClassifierNodelet::TrafficLightClassifierNodelet(const rclcpp::NodeOptions & options)
@@ -76,6 +81,10 @@ void TrafficLightClassifierNodelet::imageRoiCallback(
   const sensor_msgs::msg::Image::ConstSharedPtr & input_image_msg,
   const tier4_perception_msgs::msg::TrafficLightRoiArray::ConstSharedPtr & input_rois_msg)
 {
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+
   if (classifier_ptr_.use_count() == 0) {
     return;
   }
@@ -105,6 +114,21 @@ void TrafficLightClassifierNodelet::imageRoiCallback(
   }
   output_msg.header = input_image_msg->header;
   traffic_signal_array_pub_->publish(output_msg);
+
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFlight classifier imageRoiCB latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
+
 }
 
 }  // namespace traffic_light

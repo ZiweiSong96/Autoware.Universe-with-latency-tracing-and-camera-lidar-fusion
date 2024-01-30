@@ -180,6 +180,7 @@ void LidarCenterPointNode::pointCloudCallback(
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<input_pointcloud_msg->width<<" ";
   std::cout<<cycle_duration.seconds()<<std::endl;
   of.flush();
   of.close();

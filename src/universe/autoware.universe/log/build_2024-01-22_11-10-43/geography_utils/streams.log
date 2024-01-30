@@ -1,0 +1,33 @@
+[0.336s] Invoking command in '/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/build/geography_utils': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/mlabszw/ros2_caret_ws/install/tracetools_test:/home/mlabszw/ros2_caret_ws/install/tracetools_launch:/home/mlabszw/ros2_caret_ws/install/ros2trace:/home/mlabszw/ros2_caret_ws/install/ros2caret:/home/mlabszw/ros2_caret_ws/install/tracetools_trace:/home/mlabszw/ros2_caret_ws/install/tracetools_read:/home/mlabszw/ros2_caret_ws/install/test_tracetools_launch:/home/mlabszw/ros2_caret_ws/install/caret_analyze:/opt/ros/humble /usr/bin/cmake /home/mlabszw/autoware_with_caret/src/universe/autoware.universe/common/geography_utils -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=Off -DCMAKE_CXX_FLAGS=-w -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/install/geography_utils
+[1.742s] -- The C compiler identification is GNU 11.4.0
+[1.743s] -- The CXX compiler identification is GNU 11.4.0
+[1.743s] -- Detecting C compiler ABI info
+[1.743s] -- Detecting C compiler ABI info - done
+[1.743s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.743s] -- Detecting C compile features
+[1.743s] -- Detecting C compile features - done
+[1.743s] -- Detecting CXX compiler ABI info
+[1.743s] -- Detecting CXX compiler ABI info - done
+[1.743s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.743s] -- Detecting CXX compile features
+[1.743s] -- Detecting CXX compile features - done
+[1.747s] -- Configuring incomplete, errors occurred!
+[1.747s] See also "/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/build/geography_utils/CMakeFiles/CMakeOutput.log".
+[1.747s] [31mCMake Error at CMakeLists.txt:4 (find_package):
+[1.747s]   By not providing "Findautoware_cmake.cmake" in CMAKE_MODULE_PATH this
+[1.748s]   project has asked CMake to find a package configuration file provided by
+[1.748s]   "autoware_cmake", but CMake did not find one.
+[1.748s] 
+[1.748s]   Could not find a package configuration file provided by "autoware_cmake"
+[1.748s]   with any of the following names:
+[1.749s] 
+[1.749s]     autoware_cmakeConfig.cmake
+[1.749s]     autoware_cmake-config.cmake
+[1.749s] 
+[1.749s]   Add the installation prefix of "autoware_cmake" to CMAKE_PREFIX_PATH or set
+[1.749s]   "autoware_cmake_DIR" to a directory containing one of the above files.  If
+[1.749s]   "autoware_cmake" provides a separate development package or SDK, be sure it
+[1.749s]   has been installed.
+[1.749s] 
+[1.749s] [0m
+[1.766s] Invoked command in '/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/build/geography_utils' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/mlabszw/ros2_caret_ws/install/tracetools_test:/home/mlabszw/ros2_caret_ws/install/tracetools_launch:/home/mlabszw/ros2_caret_ws/install/ros2trace:/home/mlabszw/ros2_caret_ws/install/ros2caret:/home/mlabszw/ros2_caret_ws/install/tracetools_trace:/home/mlabszw/ros2_caret_ws/install/tracetools_read:/home/mlabszw/ros2_caret_ws/install/test_tracetools_launch:/home/mlabszw/ros2_caret_ws/install/caret_analyze:/opt/ros/humble /usr/bin/cmake /home/mlabszw/autoware_with_caret/src/universe/autoware.universe/common/geography_utils -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=Off -DCMAKE_CXX_FLAGS=-w -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/install/geography_utils

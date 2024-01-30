@@ -37,6 +37,11 @@
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 #endif
 
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+
 namespace
 {
 cv::Point2d calcRawImagePointFromPoint3D(
@@ -192,6 +197,12 @@ bool MapBasedDetector::getTransform(
 void MapBasedDetector::cameraInfoCallback(
   const sensor_msgs::msg::CameraInfo::ConstSharedPtr input_msg)
 {
+
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
+
   if (all_traffic_lights_ptr_ == nullptr && route_traffic_lights_ptr_ == nullptr) {
     return;
   }
@@ -278,6 +289,20 @@ void MapBasedDetector::cameraInfoCallback(
   expect_roi_pub_->publish(expect_roi_msg);
   publishVisibleTrafficLights(
     tf_map2camera_vec[0], input_msg->header, visible_traffic_lights, viz_pub_);
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFMapBasedDetector_CameraInfoCB latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
+
 }
 
 bool MapBasedDetector::getTrafficLightRoi(
@@ -382,6 +407,10 @@ bool MapBasedDetector::getTrafficLightRoi(
 void MapBasedDetector::mapCallback(
   const autoware_auto_mapping_msgs::msg::HADMapBin::ConstSharedPtr input_msg)
 {
+    //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
   lanelet_map_ptr_ = std::make_shared<lanelet::LaneletMap>();
 
   lanelet::utils::conversion::fromBinMsg(*input_msg, lanelet_map_ptr_);
@@ -401,11 +430,28 @@ void MapBasedDetector::mapCallback(
       all_traffic_lights_ptr_->insert(static_cast<lanelet::ConstLineString3d>(lsp));
     }
   }
+    //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFMapBasedDetector_mapCB latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
 }
 
 void MapBasedDetector::routeCallback(
   const autoware_planning_msgs::msg::LaneletRoute::ConstSharedPtr input_msg)
 {
+    //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
   if (lanelet_map_ptr_ == nullptr) {
     RCLCPP_WARN(get_logger(), "cannot set traffic light in route because don't receive map");
     return;
@@ -436,6 +482,19 @@ void MapBasedDetector::routeCallback(
       route_traffic_lights_ptr_->insert(static_cast<lanelet::ConstLineString3d>(lsp));
     }
   }
+      //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFMapBasedDetector_routeCB latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
 }
 
 void MapBasedDetector::getVisibleTrafficLights(
@@ -444,6 +503,10 @@ void MapBasedDetector::getVisibleTrafficLights(
   const image_geometry::PinholeCameraModel & pinhole_camera_model,
   std::vector<lanelet::ConstLineString3d> & visible_traffic_lights) const
 {
+      //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
   for (const auto & traffic_light : all_traffic_lights) {
     // some "Traffic Light" are actually not traffic lights
     if (
@@ -493,6 +556,19 @@ void MapBasedDetector::getVisibleTrafficLights(
       break;
     }
   }
+      //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFMapBasedDetector_getvisiableTFLights latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
 }
 
 void MapBasedDetector::publishVisibleTrafficLights(
@@ -500,6 +576,10 @@ void MapBasedDetector::publishVisibleTrafficLights(
   const std::vector<lanelet::ConstLineString3d> & visible_traffic_lights,
   const rclcpp::Publisher<visualization_msgs::msg::MarkerArray>::SharedPtr pub)
 {
+      //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
   visualization_msgs::msg::MarkerArray output_msg;
   for (const auto & traffic_light : visible_traffic_lights) {
     const int id = traffic_light.id();
@@ -539,6 +619,19 @@ void MapBasedDetector::publishVisibleTrafficLights(
     output_msg.markers.push_back(marker);
   }
   pub->publish(output_msg);
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFMapBasedDetector_pub_visiableTFlight latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
 }
 }  // namespace traffic_light
 

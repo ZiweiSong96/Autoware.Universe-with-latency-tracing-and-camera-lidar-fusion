@@ -1,0 +1,40 @@
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 1.3.6 (/opt/ros/humble/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found cudnn_cmake_module: 0.0.1 (/opt/ros/humble/share/cudnn_cmake_module/cmake)
+-- Found rclcpp: 16.0.5 (/home/mlabszw/ros2_caret_ws/install/rclcpp/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_cyclonedds_cpp: 1.3.4 (/opt/ros/humble/share/rmw_cyclonedds_cpp/cmake)
+-- Using RMW implementation 'rmw_cyclonedds_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Found tensorrt_cmake_module: 0.0.3 (/opt/ros/humble/share/tensorrt_cmake_module/cmake)
+-- Found CUDA: /usr/local/cuda (found version "11.6") 
+-- Found CUDAToolkit: /usr/local/cuda/include (found version "11.6.124") 
+-- Found CUDNN: /usr/lib/x86_64-linux-gnu/libcudnn.so (found version "8.4.1") 
+-- Found TensorRT headers at /usr/include/x86_64-linux-gnu
+-- Found TensorRT libs at /usr/lib/x86_64-linux-gnu/libnvinfer.so;/usr/lib/x86_64-linux-gnu/libnvinfer_plugin.so;/usr/lib/x86_64-linux-gnu/libnvparsers.so;/usr/lib/x86_64-linux-gnu/libnvonnxparser.so
+-- Found TENSORRT: /usr/include/x86_64-linux-gnu (found version "8.4.2") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/mlabszw/autoware_with_caret/src/universe/autoware.universe/build/tensorrt_common

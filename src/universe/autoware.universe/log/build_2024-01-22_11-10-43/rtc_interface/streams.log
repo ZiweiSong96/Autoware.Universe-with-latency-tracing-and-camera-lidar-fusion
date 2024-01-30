@@ -1,0 +1,32 @@
+[0.844s] Invoking command in '/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/build/rtc_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/mlabszw/ros2_caret_ws/install/tracetools_test:/home/mlabszw/ros2_caret_ws/install/tracetools_launch:/home/mlabszw/ros2_caret_ws/install/ros2trace:/home/mlabszw/ros2_caret_ws/install/ros2caret:/home/mlabszw/ros2_caret_ws/install/tracetools_trace:/home/mlabszw/ros2_caret_ws/install/tracetools_read:/home/mlabszw/ros2_caret_ws/install/test_tracetools_launch:/home/mlabszw/ros2_caret_ws/install/caret_analyze:/opt/ros/humble /usr/bin/cmake /home/mlabszw/autoware_with_caret/src/universe/autoware.universe/planning/rtc_interface -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=Off -DCMAKE_CXX_FLAGS=-w -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/install/rtc_interface
+[1.410s] -- The C compiler identification is GNU 11.4.0
+[1.685s] -- The CXX compiler identification is GNU 11.4.0
+[1.708s] -- Detecting C compiler ABI info
+[1.956s] -- Detecting C compiler ABI info - done
+[1.967s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.967s] -- Detecting C compile features
+[1.983s] -- Detecting C compile features - done
+[1.985s] -- Detecting CXX compiler ABI info
+[2.083s] -- Detecting CXX compiler ABI info - done
+[2.093s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[2.099s] -- Detecting CXX compile features
+[2.100s] -- Detecting CXX compile features - done
+[2.160s] -- Found ament_cmake_auto: 1.3.6 (/opt/ros/humble/share/ament_cmake_auto/cmake)
+[2.597s] -- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+[2.654s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[4.156s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[4.226s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[4.239s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[4.342s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[4.414s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[4.676s] -- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[4.696s] -- Found rmw_cyclonedds_cpp: 1.3.4 (/opt/ros/humble/share/rmw_cyclonedds_cpp/cmake)
+[4.921s] -- Using RMW implementation 'rmw_cyclonedds_cpp' as default
+[4.969s] -- Looking for pthread.h
+[5.057s] -- Looking for pthread.h - found
+[5.057s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[5.133s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[5.134s] -- Found Threads: TRUE  
+[5.366s] -- Configuring done
+[5.372s] -- Generating done
+[5.373s] -- Build files have been written to: /home/mlabszw/autoware_with_caret/src/universe/autoware.universe/build/rtc_interface

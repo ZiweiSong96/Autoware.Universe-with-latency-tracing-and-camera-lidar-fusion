@@ -60,6 +60,10 @@ TrafficLightFineDetectorNodelet::TrafficLightFineDetectorNodelet(
   const rclcpp::NodeOptions & options)
 : Node("traffic_light_fine_detector_node", options)
 {
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+
   int num_class = 2;
   using std::placeholders::_1;
   using std::placeholders::_2;
@@ -119,6 +123,20 @@ TrafficLightFineDetectorNodelet::TrafficLightFineDetectorNodelet(
     RCLCPP_INFO(get_logger(), "TensorRT engine is built and shutdown node.");
     rclcpp::shutdown();
   }
+
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFlight fine detector init latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
 }
 
 void TrafficLightFineDetectorNodelet::connectCb()
@@ -261,6 +279,11 @@ void TrafficLightFineDetectorNodelet::detectionMatch(
   std::map<int, TrafficLightRoi> & id2expectRoi,
   std::map<int, tensorrt_yolox::ObjectArray> & id2detections, TrafficLightRoiArray & out_rois)
 {
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+
+
   float max_score = 0.0f;
   std::map<int, tensorrt_yolox::Object> bestDetections;
   for (const auto & roi_pair : id2expectRoi) {
@@ -302,6 +325,21 @@ void TrafficLightFineDetectorNodelet::detectionMatch(
     tlr.roi.height = p.second.height;
     out_rois.rois.push_back(tlr);
   }
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFlight fine detector detection match latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
+
+
 }
 
 bool TrafficLightFineDetectorNodelet::rosMsg2CvMat(

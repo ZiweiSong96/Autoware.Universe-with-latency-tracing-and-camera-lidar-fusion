@@ -112,6 +112,11 @@ void TrafficLightArbiter::onExternalMsg(const TrafficSignalArray::ConstSharedPtr
 
 void TrafficLightArbiter::arbitrateAndPublish(const builtin_interfaces::msg::Time & stamp)
 {
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
+
   using ElementAndPriority = std::pair<Element, bool>;
   std::unordered_map<lanelet::Id, std::vector<ElementAndPriority>> regulatory_element_signals_map;
 
@@ -193,14 +198,26 @@ void TrafficLightArbiter::arbitrateAndPublish(const builtin_interfaces::msg::Tim
   pub_->publish(output_signals_msg);
 
     //End time stamp:
-  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
-  auto end_time = steady_clock_.now();
+  // rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  // auto end_time = steady_clock_.now();
+  // streambuf* coutBuf = std::cout.rdbuf();
+  // ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFlight_arbiter_end_time.txt",ios::app);
+  // streambuf* fileBuf = of.rdbuf();
+  // std::cout.rdbuf(fileBuf);
+  // std::cout<<fixed<<setprecision(10)<<end_time.seconds()<<" ";
+  // std::cout<<end_time.seconds()<<std::endl;
+  // of.flush();
+  // of.close();
+  // std::cout.rdbuf(coutBuf);
+
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
   ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFlight_arbiter_end_time.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
-  std::cout<<fixed<<setprecision(10)<<end_time.seconds()<<" ";
-  std::cout<<end_time.seconds()<<std::endl;
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
   of.flush();
   of.close();
   std::cout.rdbuf(coutBuf);

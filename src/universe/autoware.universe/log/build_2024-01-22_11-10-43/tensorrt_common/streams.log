@@ -1,0 +1,41 @@
+[0.554s] Invoking command in '/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/build/tensorrt_common': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/mlabszw/ros2_caret_ws/install/tracetools_test:/home/mlabszw/ros2_caret_ws/install/tracetools_launch:/home/mlabszw/ros2_caret_ws/install/ros2trace:/home/mlabszw/ros2_caret_ws/install/ros2caret:/home/mlabszw/ros2_caret_ws/install/tracetools_trace:/home/mlabszw/ros2_caret_ws/install/tracetools_read:/home/mlabszw/ros2_caret_ws/install/test_tracetools_launch:/home/mlabszw/ros2_caret_ws/install/caret_analyze:/opt/ros/humble /usr/bin/cmake /home/mlabszw/autoware_with_caret/src/universe/autoware.universe/common/tensorrt_common -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=Off -DCMAKE_CXX_FLAGS=-w -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/install/tensorrt_common
+[1.113s] -- The C compiler identification is GNU 11.4.0
+[1.376s] -- The CXX compiler identification is GNU 11.4.0
+[1.411s] -- Detecting C compiler ABI info
+[1.657s] -- Detecting C compiler ABI info - done
+[1.667s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.669s] -- Detecting C compile features
+[1.686s] -- Detecting C compile features - done
+[1.689s] -- Detecting CXX compiler ABI info
+[1.817s] -- Detecting CXX compiler ABI info - done
+[1.826s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.826s] -- Detecting CXX compile features
+[1.827s] -- Detecting CXX compile features - done
+[1.940s] -- Found ament_cmake: 1.3.6 (/opt/ros/humble/share/ament_cmake/cmake)
+[2.332s] -- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+[2.385s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[3.496s] -- Found cudnn_cmake_module: 0.0.1 (/opt/ros/humble/share/cudnn_cmake_module/cmake)
+[3.511s] -- Found rclcpp: 16.0.5 (/home/mlabszw/ros2_caret_ws/install/rclcpp/share/rclcpp/cmake)
+[3.859s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[3.929s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[3.943s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[4.045s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[4.117s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[4.379s] -- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[4.399s] -- Found rmw_cyclonedds_cpp: 1.3.4 (/opt/ros/humble/share/rmw_cyclonedds_cpp/cmake)
+[4.624s] -- Using RMW implementation 'rmw_cyclonedds_cpp' as default
+[4.673s] -- Looking for pthread.h
+[4.760s] -- Looking for pthread.h - found
+[4.760s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[4.830s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[4.831s] -- Found Threads: TRUE  
+[5.035s] -- Found tensorrt_cmake_module: 0.0.3 (/opt/ros/humble/share/tensorrt_cmake_module/cmake)
+[5.156s] -- Found CUDA: /usr/local/cuda (found version "11.6") 
+[5.168s] -- Found CUDAToolkit: /usr/local/cuda/include (found version "11.6.124") 
+[5.216s] -- Found CUDNN: /usr/lib/x86_64-linux-gnu/libcudnn.so (found version "8.4.1") 
+[5.217s] -- Found TensorRT headers at /usr/include/x86_64-linux-gnu
+[5.221s] -- Found TensorRT libs at /usr/lib/x86_64-linux-gnu/libnvinfer.so;/usr/lib/x86_64-linux-gnu/libnvinfer_plugin.so;/usr/lib/x86_64-linux-gnu/libnvparsers.so;/usr/lib/x86_64-linux-gnu/libnvonnxparser.so
+[5.221s] -- Found TENSORRT: /usr/include/x86_64-linux-gnu (found version "8.4.2") 
+[5.282s] -- Configuring done
+[5.309s] -- Generating done
+[5.310s] -- Build files have been written to: /home/mlabszw/autoware_with_caret/src/universe/autoware.universe/build/tensorrt_common

@@ -28,6 +28,10 @@
 #include <tf2_sensor_msgs/tf2_sensor_msgs.hpp>
 #endif
 
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 // cspell: ignore minx, maxx, miny, maxy, minz, maxz
 
 namespace image_projection_based_fusion
@@ -84,6 +88,11 @@ void RoiClusterFusionNode::fuseOnSingleImage(
   const DetectedObjectsWithFeature & input_roi_msg,
   const sensor_msgs::msg::CameraInfo & camera_info, DetectedObjectsWithFeature & output_cluster_msg)
 {
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
+    
   std::vector<sensor_msgs::msg::RegionOfInterest> debug_image_rois;
   std::vector<sensor_msgs::msg::RegionOfInterest> debug_pointcloud_rois;
   std::vector<Eigen::Vector2d> debug_image_points;
@@ -235,6 +244,20 @@ void RoiClusterFusionNode::fuseOnSingleImage(
     }
     debug_image_rois.push_back(feature_obj.feature.roi);
   }
+
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/roi_cluster_fusion latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
 
   if (debugger_) {
     debugger_->image_rois_ = debug_image_rois;

@@ -27,6 +27,10 @@
 
 #include "euclidean_cluster/utils.hpp"
 
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 namespace image_projection_based_fusion
 {
 RoiPointCloudFusionNode::RoiPointCloudFusionNode(const rclcpp::NodeOptions & options)
@@ -77,6 +81,11 @@ void RoiPointCloudFusionNode::fuseOnSingleImage(
   const sensor_msgs::msg::CameraInfo & camera_info,
   __attribute__((unused)) sensor_msgs::msg::PointCloud2 & output_pointcloud_msg)
 {
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
+
   if (input_pointcloud_msg.data.empty()) {
     return;
   }
@@ -152,6 +161,20 @@ void RoiPointCloudFusionNode::fuseOnSingleImage(
   updateOutputFusedObjects(
     output_objs, clusters, input_pointcloud_msg.header, input_roi_msg.header, tf_buffer_,
     min_cluster_size_, cluster_2d_tolerance_, output_fused_objects_);
+  
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/roi_point_cloud_fusion latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
 }
 
 bool RoiPointCloudFusionNode::out_of_scope(__attribute__((unused))

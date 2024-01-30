@@ -1,0 +1,33 @@
+[1.140s] Invoking command in '/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/build/component_interface_utils': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/mlabszw/ros2_caret_ws/install/tracetools_test:/home/mlabszw/ros2_caret_ws/install/tracetools_launch:/home/mlabszw/ros2_caret_ws/install/ros2trace:/home/mlabszw/ros2_caret_ws/install/ros2caret:/home/mlabszw/ros2_caret_ws/install/tracetools_trace:/home/mlabszw/ros2_caret_ws/install/tracetools_read:/home/mlabszw/ros2_caret_ws/install/test_tracetools_launch:/home/mlabszw/ros2_caret_ws/install/caret_analyze:/opt/ros/humble /usr/bin/cmake /home/mlabszw/autoware_with_caret/src/universe/autoware.universe/common/component_interface_utils -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=Off -DCMAKE_CXX_FLAGS=-w -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/install/component_interface_utils
+[1.711s] -- The C compiler identification is GNU 11.4.0
+[1.982s] -- The CXX compiler identification is GNU 11.4.0
+[2.010s] -- Detecting C compiler ABI info
+[2.256s] -- Detecting C compiler ABI info - done
+[2.268s] -- Check for working C compiler: /usr/bin/cc - skipped
+[2.268s] -- Detecting C compile features
+[2.285s] -- Detecting C compile features - done
+[2.288s] -- Detecting CXX compiler ABI info
+[2.403s] -- Detecting CXX compiler ABI info - done
+[2.413s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[2.414s] -- Detecting CXX compile features
+[2.414s] -- Detecting CXX compile features - done
+[2.542s] [31mCMake Error at CMakeLists.txt:4 (find_package):
+[2.542s]   By not providing "Findautoware_cmake.cmake" in CMAKE_MODULE_PATH this
+[2.543s]   project has asked CMake to find a package configuration file provided by
+[2.543s]   "autoware_cmake", but CMake did not find one.
+[2.543s] 
+[2.543s]   Could not find a package configuration file provided by "autoware_cmake"
+[2.543s]   with any of the following names:
+[2.543s] 
+[2.543s]     autoware_cmakeConfig.cmake
+[2.543s]     autoware_cmake-config.cmake
+[2.543s] 
+[2.543s]   Add the installation prefix of "autoware_cmake" to CMAKE_PREFIX_PATH or set
+[2.543s]   "autoware_cmake_DIR" to a directory containing one of the above files.  If
+[2.543s]   "autoware_cmake" provides a separate development package or SDK, be sure it
+[2.543s]   has been installed.
+[2.543s] 
+[2.544s] [0m
+[2.550s] -- Configuring incomplete, errors occurred!
+[2.550s] See also "/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/build/component_interface_utils/CMakeFiles/CMakeOutput.log".
+[2.587s] Invoked command in '/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/build/component_interface_utils' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/mlabszw/ros2_caret_ws/install/tracetools_test:/home/mlabszw/ros2_caret_ws/install/tracetools_launch:/home/mlabszw/ros2_caret_ws/install/ros2trace:/home/mlabszw/ros2_caret_ws/install/ros2caret:/home/mlabszw/ros2_caret_ws/install/tracetools_trace:/home/mlabszw/ros2_caret_ws/install/tracetools_read:/home/mlabszw/ros2_caret_ws/install/test_tracetools_launch:/home/mlabszw/ros2_caret_ws/install/caret_analyze:/opt/ros/humble /usr/bin/cmake /home/mlabszw/autoware_with_caret/src/universe/autoware.universe/common/component_interface_utils -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=Off -DCMAKE_CXX_FLAGS=-w -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/mlabszw/autoware_with_caret/src/universe/autoware.universe/install/component_interface_utils

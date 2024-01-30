@@ -17,6 +17,10 @@
 #include "euclidean_cluster/utils.hpp"
 
 #include <vector>
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 
 namespace euclidean_cluster
 {
@@ -52,6 +56,10 @@ VoxelGridBasedEuclideanClusterNode::VoxelGridBasedEuclideanClusterNode(
 void VoxelGridBasedEuclideanClusterNode::onPointCloud(
   const sensor_msgs::msg::PointCloud2::ConstSharedPtr input_msg)
 {
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
   stop_watch_ptr_->toc("processing_time", true);
 
   // convert ros to pcl
@@ -74,6 +82,22 @@ void VoxelGridBasedEuclideanClusterNode::onPointCloud(
   tier4_perception_msgs::msg::DetectedObjectsWithFeature output;
   convertPointCloudClusters2Msg(input_msg->header, clusters, output);
   cluster_pub_->publish(output);
+
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/voxel_grid_euclidean cluster latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<input_msg->width<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
+
 
   // build debug msg
   if (debug_pub_->get_subscription_count() < 1) {

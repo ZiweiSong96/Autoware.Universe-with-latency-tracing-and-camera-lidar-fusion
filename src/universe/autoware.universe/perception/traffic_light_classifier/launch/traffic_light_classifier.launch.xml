@@ -5,7 +5,7 @@
   <arg name="data_path" default="$(env HOME)/autoware_data" description="packages data and artifacts directory path"/>
   <arg name="classifier_label_path" default="$(var data_path)/traffic_light_classifier/lamp_labels.txt" description="classifier label path"/>
   <arg name="classifier_model_path" default="$(var data_path)/traffic_light_classifier/traffic_light_classifier_mobilenetv2_batch_6.onnx" description="classifier onnx model path"/>
-  <arg name="classifier_precision" default="fp16"/>
+  <arg name="classifier_precision" default="fp32"/>
 
   <arg name="use_gpu" default="true"/>
   <!-- classifier_type {hsv_filter: 0, cnn: 1} -->
