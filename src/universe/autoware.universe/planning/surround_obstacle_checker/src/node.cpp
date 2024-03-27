@@ -45,6 +45,13 @@
 #include <Eigen/Core>
 #include <Eigen/Geometry>
 
+
+#include <vector>
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 namespace surround_obstacle_checker
 {
 namespace bg = boost::geometry;
@@ -276,6 +283,12 @@ rcl_interfaces::msg::SetParametersResult SurroundObstacleCheckerNode::onParam(
 
 void SurroundObstacleCheckerNode::onTimer()
 {
+
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
+
   if (!odometry_ptr_) {
     RCLCPP_INFO_THROTTLE(
       this->get_logger(), *this->get_clock(), 5000 /* ms */, "waiting for current velocity...");
@@ -374,6 +387,22 @@ void SurroundObstacleCheckerNode::onTimer()
 
   pub_stop_reason_->publish(no_start_reason_diag);
   debug_ptr_->publish();
+
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/planning/surround_obstacle_checker/latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  //std::cout<<input_pointcloud_msg->width<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+
 }
 
 void SurroundObstacleCheckerNode::onPointCloud(

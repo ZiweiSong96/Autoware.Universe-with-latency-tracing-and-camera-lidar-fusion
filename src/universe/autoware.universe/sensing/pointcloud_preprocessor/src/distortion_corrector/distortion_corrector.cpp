@@ -120,18 +120,19 @@ void DistortionCorrectorComponent::onImu(const sensor_msgs::msg::Imu::ConstShare
 
 void DistortionCorrectorComponent::onPointCloud(PointCloud2::UniquePtr points_msg)
 {
-  //start time
-  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
-  auto start_time = steady_clock_.now();
-  streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/pcdistortion_start_time_1.txt",ios::app);
-  streambuf* fileBuf = of.rdbuf();
-  std::cout.rdbuf(fileBuf);
-  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
-  std::cout<<start_time.seconds()<<std::endl;
-  of.flush();
-  of.close();
-  std::cout.rdbuf(coutBuf);
+  
+  // //start time
+  // rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  // auto start_time = steady_clock_.now();
+  // streambuf* coutBuf = std::cout.rdbuf();
+  // ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/pointcloud_preprocessor/pcdistortion_start_time_1.txt",ios::app);
+  // streambuf* fileBuf = of.rdbuf();
+  // std::cout.rdbuf(fileBuf);
+  // std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
+  // std::cout<<start_time.seconds()<<std::endl;
+  // of.flush();
+  // of.close();
+  // std::cout.rdbuf(coutBuf);
 
   //
 
@@ -191,18 +192,19 @@ bool DistortionCorrectorComponent::getTransform(
 bool DistortionCorrectorComponent::undistortPointCloud(
   const tf2::Transform & tf2_base_link_to_sensor, PointCloud2 & points)
 {
-  //start time
-  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
-  auto start_time = steady_clock_.now();
-  streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/pcdistortion_start_time_2.txt",ios::app);
-  streambuf* fileBuf = of.rdbuf();
-  std::cout.rdbuf(fileBuf);
-  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
-  std::cout<<start_time.seconds()<<std::endl;
-  of.flush();
-  of.close();
-  std::cout.rdbuf(coutBuf);
+
+  // //start time
+  // rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  // auto start_time = steady_clock_.now();
+  // streambuf* coutBuf = std::cout.rdbuf();
+  // ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/pointcloud_preprocessor/pcdistortion_start_time_2.txt",ios::app);
+  // streambuf* fileBuf = of.rdbuf();
+  // std::cout.rdbuf(fileBuf);
+  // std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
+  // std::cout<<start_time.seconds()<<std::endl;
+  // of.flush();
+  // of.close();
+  // std::cout.rdbuf(coutBuf);
 
   //
 

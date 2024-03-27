@@ -249,7 +249,7 @@ void RoiClusterFusionNode::fuseOnSingleImage(
   auto cycle_duration = steady_clock_.now()-start_time;
   auto abs_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/roi_cluster_fusion latency.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/roi_cluster_fusion/latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
@@ -269,6 +269,11 @@ void RoiClusterFusionNode::fuseOnSingleImage(
 
 bool RoiClusterFusionNode::out_of_scope(const DetectedObjectWithFeature & obj)
 {
+  // //Add Time Stamp
+  // rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  // auto start_time = steady_clock_.now();
+
+  // //Callback  
   auto cluster = obj.feature.cluster;
   bool is_out = false;
   auto valid_point = [](float p, float min_num, float max_num) -> bool {
@@ -293,6 +298,20 @@ bool RoiClusterFusionNode::out_of_scope(const DetectedObjectWithFeature & obj)
       break;
     }
   }
+
+  // //End time
+  // auto cycle_duration = steady_clock_.now()-start_time;
+  // auto abs_time = steady_clock_.now();
+  // streambuf* coutBuf = std::cout.rdbuf();
+  // ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/roi_cluster_fusion/latency_2.txt",ios::app);
+  // streambuf* fileBuf = of.rdbuf();
+  // std::cout.rdbuf(fileBuf);
+  // std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  // std::cout<<cycle_duration.seconds()<<std::endl;
+  // of.flush();
+  // of.close();
+  // std::cout.rdbuf(coutBuf);
+  // //
 
   return is_out;
 }

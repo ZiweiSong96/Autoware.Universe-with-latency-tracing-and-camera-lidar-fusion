@@ -48,6 +48,10 @@
 #include <functional>
 #include <limits>
 
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 namespace map_based_prediction
 {
 
@@ -798,6 +802,11 @@ void MapBasedPredictionNode::mapCallback(const HADMapBin::ConstSharedPtr msg)
 
 void MapBasedPredictionNode::objectsCallback(const TrackedObjects::ConstSharedPtr in_objects)
 {
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
+
   stop_watch_.tic();
   // Guard for map pointer and frame transformation
   if (!lanelet_map_ptr_) {
@@ -980,6 +989,20 @@ void MapBasedPredictionNode::objectsCallback(const TrackedObjects::ConstSharedPt
   pub_debug_markers_->publish(debug_markers);
   const auto calculation_time_msg = createStringStamped(now(), stop_watch_.toc());
   pub_calculation_time_->publish(calculation_time_msg);
+
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/map_based_prediction/latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  //std::cout<<input_pointcloud_msg->width<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
 }
 
 PredictedObject MapBasedPredictionNode::getPredictedObjectAsCrosswalkUser(

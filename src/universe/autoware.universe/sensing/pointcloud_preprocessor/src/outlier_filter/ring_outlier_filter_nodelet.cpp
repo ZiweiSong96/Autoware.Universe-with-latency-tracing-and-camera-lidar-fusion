@@ -82,7 +82,8 @@ void RingOutlierFilterComponent::faster_filter(
   //Add Time Stamp
   rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
   auto start_time = steady_clock_.now();
-
+  //CALLBACK
+  
   std::scoped_lock lock(mutex_);
   if (unused_indices) {
     RCLCPP_WARN(get_logger(), "Indices are not supported and will be ignored");
@@ -364,7 +365,7 @@ void RingOutlierFilterComponent::faster_filter(
   auto cycle_duration = steady_clock_.now()-start_time;
   auto abs_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/ring outlier filter latency.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/sensing/ring_outlier_filter/latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";

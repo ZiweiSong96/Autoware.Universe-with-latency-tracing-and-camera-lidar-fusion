@@ -35,6 +35,14 @@
 #include <Eigen/Core>
 #include <Eigen/Geometry>
 
+#include <memory>
+#include <string>
+#include <vector>
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 namespace
 {
 inline pcl::PointXY toPCL(const double x, const double y)
@@ -105,6 +113,11 @@ void ObstaclePointCloudBasedValidator::onObjectsAndObstaclePointCloud(
   const autoware_auto_perception_msgs::msg::DetectedObjects::ConstSharedPtr & input_objects,
   const sensor_msgs::msg::PointCloud2::ConstSharedPtr & input_obstacle_pointcloud)
 {
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
+
   autoware_auto_perception_msgs::msg::DetectedObjects output, removed_objects;
   output.header = input_objects->header;
   removed_objects.header = input_objects->header;
@@ -171,6 +184,22 @@ void ObstaclePointCloudBasedValidator::onObjectsAndObstaclePointCloud(
   }
 
   objects_pub_->publish(output);
+
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/obstacle_pointcloud_based_validator/latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  //std::cout<<input_pointcloud_msg->width<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+
   if (debugger_) {
     debugger_->publishRemovedObjects(removed_objects);
     debugger_->publishNeighborPointcloud(input_obstacle_pointcloud->header);

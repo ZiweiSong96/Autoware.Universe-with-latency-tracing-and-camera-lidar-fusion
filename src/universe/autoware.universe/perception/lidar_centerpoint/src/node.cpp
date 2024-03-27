@@ -35,6 +35,8 @@
 
 #include <iostream>
 #include <fstream>
+
+
 using namespace std;
 
 namespace centerpoint
@@ -176,15 +178,27 @@ void LidarCenterPointNode::pointCloudCallback(
   auto cycle_duration = steady_clock_.now()-start_time;
   auto abs_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/lidar_centerpoint latency.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/lidar_centerpoint/latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
-  std::cout<<input_pointcloud_msg->width<<" ";
+  //std::cout<<input_pointcloud_msg->width<<" ";
   std::cout<<cycle_duration.seconds()<<std::endl;
   of.flush();
   of.close();
   std::cout.rdbuf(coutBuf);
+
+  //Input Point Cloud Num. and time stamp
+  streambuf* coutBuf1 = std::cout.rdbuf();
+  ofstream of1 ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/lidar_centerpoint/input_pointcloud_num.txt",ios::app);
+  streambuf* fileBuf1 = of1.rdbuf();
+  std::cout.rdbuf(fileBuf1);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<rclcpp::Time(input_pointcloud_msg->header.stamp).seconds()<<" ";
+  std::cout<<input_pointcloud_msg->width<<std::endl;
+  of1.flush();
+  of1.close();
+  std::cout.rdbuf(coutBuf1);  
   //
   // add processing time for debug
   if (debug_publisher_ptr_ && stop_watch_ptr_) {

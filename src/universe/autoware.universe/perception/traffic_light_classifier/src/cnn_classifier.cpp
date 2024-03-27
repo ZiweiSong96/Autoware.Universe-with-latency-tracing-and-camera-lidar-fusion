@@ -23,6 +23,10 @@
 #include <string>
 #include <vector>
 
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 namespace traffic_light
 {
 CNNClassifier::CNNClassifier(rclcpp::Node * node_ptr) : node_ptr_(node_ptr)
@@ -67,6 +71,10 @@ bool CNNClassifier::getTrafficSignals(
   const std::vector<cv::Mat> & images,
   tier4_perception_msgs::msg::TrafficSignalArray & traffic_signals)
 {
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+
   if (images.size() != traffic_signals.signals.size()) {
     RCLCPP_WARN(node_ptr_->get_logger(), "image number should be equal to traffic signal number!");
     return false;
@@ -102,6 +110,19 @@ bool CNNClassifier::getTrafficSignals(
       image_batch.clear();
     }
   }
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/Traffic_light/CNN_classifier/latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
   return true;
 }
 

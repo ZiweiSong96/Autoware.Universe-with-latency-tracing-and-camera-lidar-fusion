@@ -293,7 +293,7 @@ void MapBasedDetector::cameraInfoCallback(
   auto cycle_duration = steady_clock_.now()-start_time;
   auto abs_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFMapBasedDetector_CameraInfoCB latency.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/Traffic_light/TFMapBasedDetector/CameraInfoCB_latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
@@ -434,7 +434,7 @@ void MapBasedDetector::mapCallback(
   auto cycle_duration = steady_clock_.now()-start_time;
   auto abs_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFMapBasedDetector_mapCB latency.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/Traffic_light/TFMapBasedDetector/mapCB_latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
@@ -486,7 +486,7 @@ void MapBasedDetector::routeCallback(
   auto cycle_duration = steady_clock_.now()-start_time;
   auto abs_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFMapBasedDetector_routeCB latency.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/Traffic_light/TFMapBasedDetector/routeCB_latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
@@ -560,7 +560,7 @@ void MapBasedDetector::getVisibleTrafficLights(
   auto cycle_duration = steady_clock_.now()-start_time;
   auto abs_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFMapBasedDetector_getvisiableTFLights latency.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/Traffic_light/TFMapBasedDetector/getvisiableTFLights_latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
@@ -623,7 +623,7 @@ void MapBasedDetector::publishVisibleTrafficLights(
   auto cycle_duration = steady_clock_.now()-start_time;
   auto abs_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/Traffic_light/TFMapBasedDetector_pub_visiableTFlight latency.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/Traffic_light/TFMapBasedDetector/pub_visiableTFlight_latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";

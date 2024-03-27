@@ -119,18 +119,19 @@ void CropBoxFilterComponent::faster_filter(
   const PointCloud2ConstPtr & input, const IndicesPtr & indices, PointCloud2 & output,
   const TransformInfo & transform_info)
 {
-  //start time
-  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
-  auto start_time = steady_clock_.now();
-  streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/crop_box_filter_start_time.txt",ios::app);
-  streambuf* fileBuf = of.rdbuf();
-  std::cout.rdbuf(fileBuf);
-  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
-  std::cout<<start_time.seconds()<<std::endl;
-  of.flush();
-  of.close();
-  std::cout.rdbuf(coutBuf);
+
+  // //start time
+  // rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  // auto start_time = steady_clock_.now();
+  // streambuf* coutBuf = std::cout.rdbuf();
+  // ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/pointcloud_preprocessor/crop_box_filter_start_time.txt",ios::app);
+  // streambuf* fileBuf = of.rdbuf();
+  // std::cout.rdbuf(fileBuf);
+  // std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
+  // std::cout<<start_time.seconds()<<std::endl;
+  // of.flush();
+  // of.close();
+  // std::cout.rdbuf(coutBuf);
 
   //
   std::scoped_lock lock(mutex_);

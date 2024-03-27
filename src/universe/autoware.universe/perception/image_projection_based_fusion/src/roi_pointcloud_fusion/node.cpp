@@ -166,7 +166,7 @@ void RoiPointCloudFusionNode::fuseOnSingleImage(
   auto cycle_duration = steady_clock_.now()-start_time;
   auto abs_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/roi_point_cloud_fusion latency.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/roi_pointcloud_fusion/latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";

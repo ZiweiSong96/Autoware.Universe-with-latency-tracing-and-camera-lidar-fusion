@@ -87,15 +87,25 @@ void VoxelGridBasedEuclideanClusterNode::onPointCloud(
   auto cycle_duration = steady_clock_.now()-start_time;
   auto abs_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/voxel_grid_euclidean cluster latency.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/voxel_grid_euclidean_cluster/latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
-  std::cout<<input_msg->width<<" ";
+  //std::cout<<input_msg->width<<" ";
   std::cout<<cycle_duration.seconds()<<std::endl;
   of.flush();
   of.close();
   std::cout.rdbuf(coutBuf);
+
+  streambuf* coutBuf1 = std::cout.rdbuf();
+  ofstream of1 ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/voxel_grid_euclidean_cluster/input_pointcloud_num.txt",ios::app);
+  streambuf* fileBuf1 = of1.rdbuf();
+  std::cout.rdbuf(fileBuf1);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<input_msg->width<<std::endl;
+  of1.flush();
+  of1.close();
+  std::cout.rdbuf(coutBuf1); 
   //
 
 

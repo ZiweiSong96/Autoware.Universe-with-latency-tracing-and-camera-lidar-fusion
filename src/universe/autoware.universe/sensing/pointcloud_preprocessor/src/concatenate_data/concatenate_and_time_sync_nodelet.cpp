@@ -224,11 +224,11 @@ void PointCloudConcatenateDataSynchronizerComponent::transformPointCloud(
   rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
   auto start_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/concatenate_transform_start_time.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/pointcloud_preprocessor/concatenate_transform_start_time.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
-  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
-  std::cout<<start_time.seconds()<<std::endl;
+  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<std::endl;
+  //std::cout<<start_time.seconds()<<std::endl;
   of.flush();
   of.close();
   std::cout.rdbuf(coutBuf);
@@ -334,11 +334,11 @@ PointCloudConcatenateDataSynchronizerComponent::combineClouds(
   rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
   auto start_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/concatenate_combinePC_start_time.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/pointcloud_preprocessor/concatenate_combinePC_start_time.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
-  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
-  std::cout<<start_time.seconds()<<std::endl;
+  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<std::endl;
+  //std::cout<<start_time.seconds()<<std::endl;
   of.flush();
   of.close();
   std::cout.rdbuf(coutBuf);
@@ -404,6 +404,19 @@ PointCloudConcatenateDataSynchronizerComponent::combineClouds(
     }
   }
   concat_cloud_ptr->header.stamp = oldest_stamp;
+
+  //Time stamp
+  streambuf* coutBuf1 = std::cout.rdbuf();
+  ofstream of1 ("/home/mlabszw/autoware_with_caret/my_evaluate/pointcloud_preprocessor/concatenate_combinePC_timestamp.txt",ios::app);
+  streambuf* fileBuf1 = of1.rdbuf();
+  std::cout.rdbuf(fileBuf1);
+  std::cout<<rclcpp::Time(concat_cloud_ptr->header.stamp).seconds()<<std::endl;
+  of1.flush();
+  of1.close();
+  std::cout.rdbuf(coutBuf1);  
+  //
+
+
   return transformed_clouds;
 }
 
@@ -413,16 +426,16 @@ void PointCloudConcatenateDataSynchronizerComponent::publish()
   rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
   auto start_time = steady_clock_.now();
   streambuf* coutBuf = std::cout.rdbuf();
-  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/concatenate_publish_start_time.txt",ios::app);
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/pointcloud_preprocessor/concatenate_publish_start_time.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
-  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
-  std::cout<<start_time.seconds()<<std::endl;
+  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<std::endl;
+  //std::cout<<start_time.seconds()<<std::endl;
   of.flush();
   of.close();
   std::cout.rdbuf(coutBuf);
 
-  //
+  
 
 
   stop_watch_ptr_->toc("processing_time", true);
@@ -476,20 +489,20 @@ void PointCloudConcatenateDataSynchronizerComponent::convertToXYZICloud(
   const sensor_msgs::msg::PointCloud2::SharedPtr & input_ptr,
   sensor_msgs::msg::PointCloud2::SharedPtr & output_ptr)
 {
-  // //start time
-  // rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
-  // auto start_time = steady_clock_.now();
-  // streambuf* coutBuf = std::cout.rdbuf();
-  // ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/concatenate_PCconvert_start_time.txt",ios::app);
-  // streambuf* fileBuf = of.rdbuf();
-  // std::cout.rdbuf(fileBuf);
-  // std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
-  // std::cout<<start_time.seconds()<<std::endl;
-  // of.flush();
-  // of.close();
-  // std::cout.rdbuf(coutBuf);
+  //start time
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/pointcloud_preprocessor/concatenate_PCconvert_start_time.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
+  std::cout<<start_time.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
 
-  // //
+  //
 
 
   output_ptr->header = input_ptr->header;
@@ -525,6 +538,17 @@ void PointCloudConcatenateDataSynchronizerComponent::convertToXYZICloud(
       output_modifier.push_back(std::move(point));
     }
   }
+
+  //Time stamp
+  streambuf* coutBuf1 = std::cout.rdbuf();
+  ofstream of1 ("/home/mlabszw/autoware_with_caret/my_evaluate/pointcloud_preprocessor/concatenate_PCconvert_timestamp.txt",ios::app);
+  streambuf* fileBuf1 = of1.rdbuf();
+  std::cout.rdbuf(fileBuf1);
+  std::cout<<rclcpp::Time(output_ptr->header.stamp).seconds()<<std::endl;
+  of1.flush();
+  of1.close();
+  std::cout.rdbuf(coutBuf1);  
+  //
 }
 
 void PointCloudConcatenateDataSynchronizerComponent::setPeriod(const int64_t new_period)
@@ -546,6 +570,21 @@ void PointCloudConcatenateDataSynchronizerComponent::setPeriod(const int64_t new
 void PointCloudConcatenateDataSynchronizerComponent::cloud_callback(
   const sensor_msgs::msg::PointCloud2::ConstSharedPtr & input_ptr, const std::string & topic_name)
 {
+
+  //start time
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/pointcloud_preprocessor/concatenate_pc_callback_start_time.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<std::endl;
+  //std::cout<<start_time.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+
+   
   std::lock_guard<std::mutex> lock(mutex_);
   auto input = std::make_shared<sensor_msgs::msg::PointCloud2>(*input_ptr);
   if (input->data.empty()) {

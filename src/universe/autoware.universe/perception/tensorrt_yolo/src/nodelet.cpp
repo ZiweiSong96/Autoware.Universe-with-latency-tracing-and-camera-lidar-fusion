@@ -24,6 +24,11 @@
 #include <utility>
 #include <vector>
 
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+
 namespace
 {
 std::vector<std::string> getFilePath(const std::string & input_dir)
@@ -130,6 +135,10 @@ void TensorrtYoloNodelet::connectCb()
 
 void TensorrtYoloNodelet::callback(const sensor_msgs::msg::Image::ConstSharedPtr in_image_msg)
 {
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //callback
   using Label = autoware_auto_perception_msgs::msg::ObjectClassification;
 
   tier4_perception_msgs::msg::DetectedObjectsWithFeature out_objects;
@@ -196,6 +205,20 @@ void TensorrtYoloNodelet::callback(const sensor_msgs::msg::Image::ConstSharedPtr
 
   out_objects.header = in_image_msg->header;
   objects_pub_->publish(out_objects);
+  //End time
+  auto cycle_duration = steady_clock_.now()-start_time;
+  auto abs_time = steady_clock_.now();
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/yolov/latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);
+  //
+
 }
 
 bool TensorrtYoloNodelet::readLabelFile(
