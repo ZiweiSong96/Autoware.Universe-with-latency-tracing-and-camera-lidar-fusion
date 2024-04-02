@@ -186,16 +186,17 @@ void ObstaclePointCloudBasedValidator::onObjectsAndObstaclePointCloud(
   objects_pub_->publish(output);
 
   //End time
-  auto cycle_duration = steady_clock_.now()-start_time;
   auto abs_time = steady_clock_.now();
+  auto cycle_duration = steady_clock_.now()-start_time;
   streambuf* coutBuf = std::cout.rdbuf();
   ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/obstacle_pointcloud_based_validator/latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
-  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
+  //std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
   //std::cout<<input_pointcloud_msg->width<<" ";
-  std::cout<<cycle_duration.seconds()<<std::endl;
+  std::cout<<cycle_duration.seconds()<<" ";
+  std::cout<<rclcpp::Time(input_objects->header.stamp).seconds()<<std::endl;
   of.flush();
   of.close();
   std::cout.rdbuf(coutBuf);

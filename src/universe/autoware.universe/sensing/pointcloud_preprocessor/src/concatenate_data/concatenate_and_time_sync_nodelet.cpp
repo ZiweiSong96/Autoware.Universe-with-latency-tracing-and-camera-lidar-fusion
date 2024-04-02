@@ -410,6 +410,7 @@ PointCloudConcatenateDataSynchronizerComponent::combineClouds(
   ofstream of1 ("/home/mlabszw/autoware_with_caret/my_evaluate/pointcloud_preprocessor/concatenate_combinePC_timestamp.txt",ios::app);
   streambuf* fileBuf1 = of1.rdbuf();
   std::cout.rdbuf(fileBuf1);
+  std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
   std::cout<<rclcpp::Time(concat_cloud_ptr->header.stamp).seconds()<<std::endl;
   of1.flush();
   of1.close();
@@ -497,7 +498,8 @@ void PointCloudConcatenateDataSynchronizerComponent::convertToXYZICloud(
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
-  std::cout<<start_time.seconds()<<std::endl;
+  std::cout<<rclcpp::Time(input_ptr->header.stamp).seconds()<<std::endl;
+  //std::cout<<start_time.seconds()<<std::endl;
   of.flush();
   of.close();
   std::cout.rdbuf(coutBuf);

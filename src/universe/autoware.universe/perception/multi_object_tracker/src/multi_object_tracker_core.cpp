@@ -189,8 +189,8 @@ void MultiObjectTracker::onMeasurement(
   }
 
   //End time
-  auto cycle_duration = steady_clock_.now()-start_time;
-  auto abs_time = steady_clock_.now();
+  auto abs_time = steady_clock_.now();  
+  auto cycle_duration = abs_time-start_time;
   streambuf* coutBuf = std::cout.rdbuf();
   ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/multi_object_tracker/latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
@@ -198,6 +198,8 @@ void MultiObjectTracker::onMeasurement(
   std::cout<<fixed<<setprecision(10)<<start_time.seconds()<<" ";
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
   //std::cout<<input_pointcloud_msg->width<<" ";
+  std::cout<<rclcpp::Time(input_objects_msg->header.stamp).seconds()<<" ";
+  std::cout<<rclcpp::Time(transformed_objects.header.stamp).seconds()<<" ";
   std::cout<<cycle_duration.seconds()<<std::endl;
   of.flush();
   of.close();

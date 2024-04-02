@@ -2,7 +2,7 @@ import csv
 import matplotlib.pyplot as plt
 import argparse
 
-def plot_line_chart(csv_file_path,save_path):
+def plot_line_chart(csv_file_path,save_path,i,j):
     x_values =[]
     y_values =[]
 
@@ -10,8 +10,8 @@ def plot_line_chart(csv_file_path,save_path):
         reader = csv.reader(csvfile)
         next(reader)
         for row in reader:
-            x_values.append(float(row[0]))
-            y_values.append(float(row[1]))
+            x_values.append(float(row[i]))
+            y_values.append(float(row[j]))
     
     plt.plot(x_values, y_values)
     plt.xlabel('Time stamp')
@@ -22,6 +22,8 @@ def plot_line_chart(csv_file_path,save_path):
 parser = argparse.ArgumentParser(description='Drawing figures')
 parser.add_argument('csv_file_path',type=str,help='csv file path')
 parser.add_argument('save_path',type=str, help='Image save path')
+parser.add_argument('i',type=int, help='row index')
+parser.add_argument('j',type=int, help='row index')
 
 args = parser.parse_args()
 
@@ -32,4 +34,4 @@ args = parser.parse_args()
 # csv_file_path = '/home/mlabszw/autoware_with_caret/my_evaluate/perception/lidar_centerpoint/latency.csv'
 # save_path = '/home/mlabszw/autoware_with_caret/my_evaluate/image/lidar_centerpoint_latency.png'
 # plot_line_chart(csv_file_path,save_path)
-plot_line_chart(args.csv_file_path, args.save_path)
+plot_line_chart(args.csv_file_path, args.save_path, args.i, args.j)

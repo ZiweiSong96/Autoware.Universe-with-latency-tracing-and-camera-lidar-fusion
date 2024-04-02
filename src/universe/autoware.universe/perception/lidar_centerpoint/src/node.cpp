@@ -175,31 +175,44 @@ void LidarCenterPointNode::pointCloudCallback(
     objects_pub_->publish(output_msg);
   }
   //End time
-  auto cycle_duration = steady_clock_.now()-start_time;
   auto abs_time = steady_clock_.now();
+  auto cycle_duration = steady_clock_.now()-start_time;
   streambuf* coutBuf = std::cout.rdbuf();
   ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/lidar_centerpoint/latency.txt",ios::app);
   streambuf* fileBuf = of.rdbuf();
   std::cout.rdbuf(fileBuf);
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  std::cout<<rclcpp::Time(input_pointcloud_msg->header.stamp).seconds()<<" ";
   //std::cout<<input_pointcloud_msg->width<<" ";
   std::cout<<cycle_duration.seconds()<<std::endl;
   of.flush();
   of.close();
   std::cout.rdbuf(coutBuf);
 
-  //Input Point Cloud Num. and time stamp
+  //Input Point Cloud Num.
   streambuf* coutBuf1 = std::cout.rdbuf();
   ofstream of1 ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/lidar_centerpoint/input_pointcloud_num.txt",ios::app);
   streambuf* fileBuf1 = of1.rdbuf();
   std::cout.rdbuf(fileBuf1);
   std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
-  std::cout<<rclcpp::Time(input_pointcloud_msg->header.stamp).seconds()<<" ";
+  //std::cout<<rclcpp::Time(input_pointcloud_msg->header.stamp).seconds()<<" ";
   std::cout<<input_pointcloud_msg->width<<std::endl;
   of1.flush();
   of1.close();
   std::cout.rdbuf(coutBuf1);  
-  //
+  
+  // //Timestamp
+  // streambuf* coutBuf2 = std::cout.rdbuf();
+  // ofstream of2 ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/lidar_centerpoint/TimeStamp.txt",ios::app);
+  // streambuf* fileBuf2 = of2.rdbuf();
+  // std::cout.rdbuf(fileBuf2);
+  // std::cout<<cycle_duration.seconds()<<" ";
+  // std::cout<<rclcpp::Time(input_pointcloud_msg->header.stamp).seconds()<<" ";
+  // //std::cout<<rclcpp::Time(output_msg.header.stamp).seconds()<<std::endl;
+  // of2.flush();
+  // of2.close();
+  // std::cout.rdbuf(coutBuf2);
+
   // add processing time for debug
   if (debug_publisher_ptr_ && stop_watch_ptr_) {
     const double cyclic_time_ms = stop_watch_ptr_->toc("cyclic_time", true);

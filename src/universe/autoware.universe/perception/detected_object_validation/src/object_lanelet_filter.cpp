@@ -25,6 +25,10 @@
 
 #include <lanelet2_core/geometry/Polygon.h>
 
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 namespace object_lanelet_filter
 {
 ObjectLaneletFilterNode::ObjectLaneletFilterNode(const rclcpp::NodeOptions & node_options)
@@ -67,6 +71,11 @@ void ObjectLaneletFilterNode::mapCallback(
 void ObjectLaneletFilterNode::objectCallback(
   const autoware_auto_perception_msgs::msg::DetectedObjects::ConstSharedPtr input_msg)
 {
+  //Add Time Stamp
+  rclcpp::Clock steady_clock_{RCL_STEADY_TIME};
+  auto start_time = steady_clock_.now();
+  //Callback
+
   // Guard
   if (object_pub_->get_subscription_count() < 1) return;
 
@@ -110,6 +119,22 @@ void ObjectLaneletFilterNode::objectCallback(
     ++index;
   }
   object_pub_->publish(output_object_msg);
+
+  //End Time
+  auto abs_time = steady_clock_.now();  
+  auto cycle_duration = steady_clock_.now()-start_time;
+  streambuf* coutBuf = std::cout.rdbuf();
+  ofstream of ("/home/mlabszw/autoware_with_caret/my_evaluate/perception/object_lanelet_filter/latency.txt",ios::app);
+  streambuf* fileBuf = of.rdbuf();
+  std::cout.rdbuf(fileBuf);
+  std::cout<<fixed<<setprecision(10)<<abs_time.seconds()<<" ";
+  //std::cout<<input_pointcloud_msg->width<<" ";
+  std::cout<<rclcpp::Time(input_msg->header.stamp).seconds()<<" ";
+  std::cout<<rclcpp::Time(output_object_msg.header.stamp).seconds()<<" ";
+  std::cout<<cycle_duration.seconds()<<std::endl;
+  of.flush();
+  of.close();
+  std::cout.rdbuf(coutBuf);  
 }
 
 geometry_msgs::msg::Polygon ObjectLaneletFilterNode::setFootprint(
